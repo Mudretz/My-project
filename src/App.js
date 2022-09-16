@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import api from "./api";
+import BlockProfit from "./blockProfit";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [profits] = useState(api.profits.fetchAll());
+    console.log(profits);
+    return (
+        <>
+        <h2>Доходы</h2>
+            <div className="plus"></div>
+            <table cellSpacing="0">
+                <thead>
+                    <tr>
+                        <th>Дата</th>
+                        <th>Сумма</th>
+                        <th>Источник</th>
+                    </tr>
+                </thead>
+            </table>
+            <div className="scroll-table-body">
+                <table cellspacing="0">
+                    {profits.map( (profit) => (
+                        <tbody>
+                        <BlockProfit profit={profit}/>
+                        </tbody>
+                    ))}
+                </table>
+            </div>
+        </>
+    );
 }
 
 export default App;
