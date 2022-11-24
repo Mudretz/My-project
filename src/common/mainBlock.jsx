@@ -1,7 +1,7 @@
+
 import React from 'react';
 
 const MainBlock = ({ data, name, columnName1, columnName2, columnName3, numberBlock }) => {
-    console.log(columnName3);
     return (
         <div className={"main__item block-"+numberBlock}>
             <h2>{name}</h2>
