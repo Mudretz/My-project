@@ -1,32 +1,37 @@
 import React, { useState } from "react";
 import api from "./api";
-import BlockProfit from "./blockProfit";
+import MainBlock from "./common/mainBlock";
 
 function App() {
     const [profits] = useState(api.profits.fetchAll());
-    console.log(profits);
+    const [expenses] = useState(api.expenses.fetchAll());
+    const [accounts] = useState(api.accounts.fetchAll());
+    console.log(accounts);
     return (
         <>
-        <h2>Доходы</h2>
-            <div className="plus"></div>
-            <table cellSpacing="0">
-                <thead>
-                    <tr>
-                        <th>Дата</th>
-                        <th>Сумма</th>
-                        <th>Источник</th>
-                    </tr>
-                </thead>
-            </table>
-            <div className="scroll-table-body">
-                <table cellspacing="0">
-                    {profits.map( (profit) => (
-                        <tbody>
-                        <BlockProfit profit={profit}/>
-                        </tbody>
-                    ))}
-                </table>
-            </div>
+            <MainBlock
+                data={profits}
+                name="Доходы"
+                columnName1="Дата"
+                columnName2="Сумма"
+                columnName3="Источник дохода"
+                numberBlock="1"
+            />
+            <MainBlock
+                data={expenses}
+                name="Расходы"
+                columnName1="Дата"
+                columnName2="Сумма"
+                columnName3="Название расхода"
+                numberBlock="2"
+            />
+            <MainBlock
+                data={accounts}
+                name="Счета"
+                columnName1="Название счета"
+                columnName2="Баланс"
+                numberBlock="3"
+            />
         </>
     );
 }
